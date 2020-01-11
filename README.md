@@ -8,6 +8,7 @@ See the [Pandoc manual](https://pandoc.org/MANUAL.html#pandocs-markdown) for a d
 
 ## Supported markdown snippets/completions
 
+````
 ### Inline
 
 *emphasis* _emphasis_
@@ -57,3 +58,5 @@ Something^[inline note].
 Something else[^id].
 
 [^id]: note
+
+````
