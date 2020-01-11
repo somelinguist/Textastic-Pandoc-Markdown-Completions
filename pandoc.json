@@ -1,0 +1,216 @@
+{
+  "description": "Pandoc snippets",
+  "uuid": "6a6b74bb-499d-43cf-89f7-8a2d0815d0e9",
+  "completionSets": [
+    {
+      "name": "pandoc.snippets.inline",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "*emphasis*",
+          "replace": "*${1:text}*"
+        },
+        {
+          "string": "_emphasis_",
+          "replace": "_${1:text}_"
+        },
+        {
+          "string": "**strong**",
+          "replace": "**${1:text}**"
+        },
+        {
+          "string": "__strong__",
+          "replace": "__${1:text}__"
+        },
+        {
+          "string": "~~strikethrough~~",
+          "replace": "~~${1:text}~~"
+        },
+        {
+          "string": "<http://link>",
+          "replace": "<http://${1:link}>"
+        },
+        {
+          "string": "<https://link>",
+          "replace": "<https://${1:link}>"
+        },
+        {
+          "string": "[text](link)",
+          "replace": "[${1:text}](${2:link})"
+        },
+        {
+          "string": "[text][reflink]",
+          "replace": "[${1:text}][${2:label}]"
+        },
+        {
+          "string": "![alttext](img)",
+          "replace": "![${1:alttext}](${2:img})"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.footnotes",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "[^footnote marker]",
+          "replace": "[^${1:id}]"
+        },
+        {
+          "string": "^[inline note]",
+          "replace": "^[${1:note}]"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.unordered.+.continue",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "+",
+          "replace": "\n+ $0"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.unordered.-.continue",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "-",
+          "replace": "\n- $0"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.unordered.*.continue",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "*",
+          "replace": "\n* $0"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.task.-.continue",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "- [ ]",
+          "replace": "\n- [ ] $0"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.task.*.continue",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "* [ ]",
+          "replace": "\n- [ ] $0"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.task.+.continue",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "+ [ ]",
+          "replace": "\n- [ ] $0"
+        }
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.task",
+      "defaultAppend": "",
+      "strings": [
+        " ] ",
+        "x] "
+      ]
+    },
+    {
+      "name": "pandoc.snippets.lists.task",
+      "defaultAppend": "",
+      "strings": [
+        " ] ",
+        "x] "
+      ]
+    },
+    {
+      "name": "pandoc.snippets.block",
+      "defaultAppend": "",
+      "strings": [
+        {
+          "string": "[^footnote]",
+          "replace": "[^${1:id}]: ${2:note}\n\n"
+        },
+        {
+          "string": "``` code",
+          "replace": "```${1:lang}\n${2:code}\n```\n\n"
+        },
+        {
+          "string": "~~~ code",
+          "replace": "~~~${1:lang}\n${2:code}\n~~~\n\n"
+        }
+      ]
+    }
+  ],
+  "contexts": [
+    {
+      "description": "Pandoc/markdown snippets inline",
+      "scope": "text.pandoc, text.html.markdown.pandoc, text.html.markdown",
+      "pattern": "(?<![\\w\\d])([\\w\\*~\\[^!]+)",
+      "completionCaptureIndex": 1,
+      "completionSetNames": [
+        "pandoc.snippets.inline"
+      ]
+    },
+    {
+      "description": "Pandoc/markdown snippets unordered lists continue",
+      "scope": "text.pandoc, text.html.markdown.pandoc, text.html.markdown",
+      "pattern": "^\\s*([\\*\\+-])\\s+(?!\\[[\\sx]\\]).+$(.?)",
+      "completionCaptureIndex": 2,
+      "completionSetNames": [
+        "pandoc.snippets.lists.unordered.$1.continue"
+      ]
+    },
+    {
+      "description": "Pandoc/markdown snippets task lists continue",
+      "scope": "text.pandoc, text.html.markdown.pandoc, text.html.markdown",
+      "pattern": "^\\s*([-\\+\\*])\\s\\[[\\sx]\\]\\s+.+$(.?)",
+      "completionCaptureIndex": 2,
+      "completionSetNames": [
+        "pandoc.snippets.lists.task.$1.continue"
+      ]
+    },
+    {
+      "description": "Pandoc/markdown snippets task lists",
+      "scope": "text.pandoc, text.html.markdown.pandoc, text.html.markdown",
+      "pattern": "^\\s*[-\\+\\*]\\s\\[([\\sx]?)^\\[",
+      "completionCaptureIndex": 1,
+      "completionSetNames": [
+        "pandoc.snippets.lists.task"
+      ]
+    },
+    {
+      "description": "Pandoc/markdown snippets block items",
+      "scope": "text.pandoc, text.html.markdown.pandoc",
+      "pattern": "^\\s*(.?)",
+      "completionCaptureIndex": 1,
+      "completionSetNames": [
+        "pandoc.snippets.block"
+      ]
+    },
+    {
+      "description": "Pandoc/markdown snippets footnotes",
+      "scope": "text.pandoc, text.html.markdown.pandoc",
+      "pattern": "\\b[.,;]?([\\[\\^].*?)",
+      "completionCaptureIndex": 1,
+      "completionSetNames": [
+        "pandoc.snippets.footnotes"
+      ]
+    }
+  ]
+}
